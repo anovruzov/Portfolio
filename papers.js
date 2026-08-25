@@ -1,3 +1,36 @@
+(() => {
+  const papers = [...document.querySelectorAll('#writing .paper')];
+  if (papers.length < 2) return;
+
+  // Keep only the two current manuscripts.
+  papers.slice(2).forEach(paper => paper.remove());
+
+  const mycelic = papers[0];
+  const mycelicTitle = mycelic.querySelector('.paper-title');
+  const mycelicPdf = mycelic.querySelector('.paper-link');
+  const mycelicHref = 'Mycelic_Architecture_Benchmark_Preprint_2026-08-14%20(1)%20(2).pdf';
+  mycelicTitle.textContent = 'Mycelic: A Hierarchical Lineage Fabric for Persistent Agent Collectives';
+  [mycelicTitle, mycelicPdf].forEach(link => {
+    link.classList.remove('paper-pdf');
+    link.removeAttribute('data-pdf');
+    link.removeAttribute('data-pdf-parts');
+    link.href = mycelicHref;
+    link.target = '_blank';
+    link.rel = 'noreferrer';
+  });
+
+  const neural = papers[1];
+  const neuralTitle = neural.querySelector('.paper-title');
+  const neuralPdf = neural.querySelector('.paper-link');
+  neuralTitle.textContent = 'Memory Is a Graph: NeuralGraph for Persistent AI Agents';
+  [neuralTitle, neuralPdf].forEach(link => {
+    link.classList.add('paper-pdf');
+    link.href = '#';
+    link.removeAttribute('data-pdf-parts');
+    link.dataset.pdf = 'papers/neuralgraph-memory-is-a-graph.pdf.gz.b64';
+  });
+})();
+
 async function fetchPaperPayload(link){
   if(link.dataset.pdfParts){
     const urls=link.dataset.pdfParts.split(',').map(s=>s.trim()).filter(Boolean);
