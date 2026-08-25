@@ -1,3 +1,7 @@
+const portraitSizing = document.createElement('style');
+portraitSizing.textContent = '.portrait{width:220px!important;height:220px!important;flex:0 0 auto}@media(max-width:700px){.portrait{width:160px!important;height:160px!important}}';
+document.head.appendChild(portraitSizing);
+
 (() => {
   const papers = [...document.querySelectorAll('#writing .paper')];
   if (papers.length < 2) return;
@@ -22,13 +26,17 @@
   const neural = papers[1];
   const neuralTitle = neural.querySelector('.paper-title');
   const neuralPdf = neural.querySelector('.paper-link');
+  const neuralImageHref = 'neuralgraph_architecture.jpg';
   neuralTitle.textContent = 'Memory Is a Graph: NeuralGraph for Persistent AI Agents';
   [neuralTitle, neuralPdf].forEach(link => {
-    link.classList.add('paper-pdf');
-    link.href = '#';
+    link.classList.remove('paper-pdf');
+    link.href = neuralImageHref;
+    link.target = '_blank';
+    link.rel = 'noreferrer';
     link.removeAttribute('data-pdf-parts');
-    link.dataset.pdf = 'papers/neuralgraph-memory-is-a-graph.pdf.gz.b64';
+    link.removeAttribute('data-pdf');
   });
+  neuralPdf.textContent = 'JPG';
 })();
 
 async function fetchPaperPayload(link){
