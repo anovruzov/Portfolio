@@ -1,1 +1,1 @@
-{"framework":null,"installCommand":"echo no-install","buildCommand":"sha256sum gen/part*.txt && false","outputDirectory":"dist","cleanUrls":false,"trailingSlash":false}
+{"framework":null,"installCommand":"echo no-install","buildCommand":"rm -rf dist && mkdir dist && cat gen/part00.txt gen/part01.txt gen/part02.txt gen/part03.txt gen/part04.txt | base64 -d | gzip -d > dist/build_site.py && python3 dist/build_site.py && rm dist/build_site.py","outputDirectory":"dist","cleanUrls":false,"trailingSlash":false}
