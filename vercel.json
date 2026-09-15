@@ -1,0 +1,1 @@
+{"framework":null,"installCommand":"echo no-install","buildCommand":"rm -rf dist && mkdir dist && base64 -d site.b64 | tar -xz -C dist","outputDirectory":"dist","cleanUrls":false,"trailingSlash":false}
